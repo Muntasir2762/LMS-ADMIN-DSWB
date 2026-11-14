@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Academy Admin</title>
+<style>
+:root{--bg:#080c11;--sf:#141d2f;--sf2:#0c1320;--bd:#26344f;--tx:#eaf0f7;--mu:#98a9bf;--ac:#5fd01f;--ab:rgba(76,194,10,.15);--bt:#2e8b00;--btg:linear-gradient(135deg,#39a900,#2a7d00);--okb:#12341a;--okt:#6ee32a;--wb:#3a2c0e;--wt:#ffc457;--bb:#3b1717;--bdt:#ff9a9a;--nb:#222d44;--nt:#b6c4d8;--sb:rgba(10,15,22,.92);--g1:rgba(76,194,10,.17);--g2:rgba(99,70,230,.13);--sh:0 8px 24px rgba(0,0,0,.35);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#f1f5f9;--sf:#fff;--sf2:#f3f6fa;--bd:#dbe2ec;--tx:#14202e;--mu:#52647a;--ac:#2a7d00;--ab:#e4f4da;--okb:#dff3d2;--okt:#1f6a00;--wb:#fff0cf;--wt:#7a4e00;--bb:#fde3e3;--bdt:#9b2222;--nb:#e8edf4;--nt:#3b4b60;--sb:rgba(255,255,255,.95);--g1:rgba(76,194,10,.12);--g2:rgba(99,70,230,.07);--sh:0 6px 18px rgba(20,32,46,.08);color-scheme:light}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font:14px/1.5 Inter,system-ui,sans-serif;background:var(--bg);background-image:radial-gradient(900px 420px at 88% -60px,var(--g1),transparent 65%),radial-gradient(700px 420px at -5% 105%,var(--g2),transparent 65%);background-attachment:fixed;color:var(--tx)}
+.app{display:flex;min-height:100vh}
+.sb{width:240px;flex-shrink:0;background:var(--sb);border-right:1px solid var(--bd);padding:20px 12px;backdrop-filter:blur(8px)}
+.lg{font-size:20px;font-weight:800;font-style:italic;margin:0 10px 10px;background:linear-gradient(90deg,#5fd01f,#2fb8a0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gl{font-size:11px;letter-spacing:.1em;color:var(--mu);margin:16px 10px 4px;text-transform:uppercase}
+.nv{display:flex;align-items:center;padding:9px 12px;border-radius:10px;color:var(--mu);text-decoration:none;border:1px solid transparent}
+.nv::before{content:"";width:8px;height:8px;border-radius:3px;background:currentColor;margin-right:11px;opacity:.55}
+.nv:hover{background:var(--ab);color:var(--tx)}
+.nv.on{background:var(--ab);color:var(--ac);font-weight:600;border-color:rgba(95,208,31,.35);box-shadow:0 0 18px rgba(76,194,10,.18)}.nv.on::before{opacity:1;background:var(--ac)}
+.mn{flex:1;min-width:0}
+.tb{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:16px 28px;border-bottom:1px solid var(--bd)}
+.tb h1{margin:0;font-size:22px;letter-spacing:-.01em}.ct{padding:24px 28px}
+.hero{border-radius:16px;padding:24px 26px;margin-bottom:18px;background:linear-gradient(120deg,rgba(46,139,0,.55),rgba(30,40,90,.55) 70%),var(--sf);border:1px solid rgba(95,208,31,.3);box-shadow:var(--sh)}
+.hero h2{margin:0 0 4px;font-size:24px;color:#fff}.hero p{margin:0 0 14px;color:#d3e4d0;max-width:520px}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:var(--sh)}
+.card h2{margin:0 0 12px;font-size:15px}
+.mu{color:var(--mu);font-size:12.5px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:16px}
+.kp{background:linear-gradient(160deg,var(--sf),var(--sf2));border:1px solid var(--bd);border-top:3px solid var(--ac);border-radius:14px;padding:16px;box-shadow:var(--sh)}.kp b{display:block;font-size:28px;margin:4px 0;letter-spacing:-.02em}
+.btn,.b2{border-radius:10px;padding:9px 15px;font:600 14px Inter,sans-serif;min-height:40px;cursor:pointer;transition:transform .1s,box-shadow .15s}
+.btn{background:var(--btg);color:#fff;border:0;box-shadow:0 4px 14px rgba(46,139,0,.45)}.btn:hover{transform:translateY(-1px)}
+.b2{background:var(--sf2);color:var(--tx);border:1px solid var(--bd)}.b2:hover{border-color:var(--ac)}
+.sm{min-height:32px;padding:5px 11px;font-size:13px}
+.in,select,textarea{background:var(--sf2);border:1px solid var(--bd);border-radius:10px;padding:9px 11px;color:var(--tx);font:14px Inter,sans-serif;min-height:40px;width:100%;min-width:0}
+.in:focus,select:focus,textarea:focus{outline:2px solid var(--ac);outline-offset:1px}
+label{display:block;font-size:12.5px;color:var(--mu);margin-top:10px}label .in,label select,label textarea{margin-top:5px;color:var(--tx)}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:640px}
+th{text-align:left;font-size:12px;color:var(--mu);font-weight:500;padding:9px 8px;border-bottom:1px solid var(--bd)}
+td{padding:11px 8px;border-bottom:1px solid var(--bd);vertical-align:middle}tr:hover td{background:var(--ab)}
+.pl{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600;background:var(--nb);color:var(--nt)}
+.pl.ok{background:var(--okb);color:var(--okt)}.pl.wn{background:var(--wb);color:var(--wt)}.pl.bd{background:var(--bb);color:var(--bdt)}
+.bar{height:10px;border-radius:5px;background:linear-gradient(90deg,#2e8b00,#5fd01f);min-width:4px}
+.sec{border:1px solid var(--bd);border-radius:12px;padding:12px;margin-top:12px;background:var(--sf2)}
+.lc{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}.lc .in{flex:1 1 180px;width:auto}.lc select,.lc .d{width:100px}
+.fx{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}.fx>.l{flex:2 1 520px}.fx>.r{flex:1 1 280px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px));z-index:5}
+.md{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:22px;width:100%;max-width:480px;max-height:100%;overflow:auto;box-shadow:var(--sh)}.md h2{margin:0 0 4px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--ac);color:#06210a;font-weight:600;padding:10px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}.toast.show{opacity:1}
+a{color:var(--ac)}
+@media (max-width:800px){.app{flex-direction:column}.sb{width:100%;display:flex;overflow-x:auto;gap:4px;padding:10px;border-right:0;border-bottom:1px solid var(--bd)}.sb .gl,.sb .lg{display:none}.nv{white-space:nowrap}.tb,.ct{padding-left:14px;padding-right:14px}}
+</style></head><body>
+<div class="app"><nav class="sb" id="nav" aria-label="Main"></nav><main class="mn" id="v"></main></div>
+<div id="m"></div><div id="t" class="toast" role="status"></div>
+<script>
+const $=(s,e=document)=>e.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,8),fmt=n=>'৳ '+Number(n||0).toLocaleString('en-IN'),today=()=>new Date().toISOString().slice(0,10);
+const KEY='academy-admin-v1';
+const seed=()=>({
+categories:[{id:'ca1',name:'Web Development',slug:'web-development',status:'Active'},{id:'ca2',name:'UI/UX Design',slug:'ui-ux-design',status:'Active'},{id:'ca3',name:'Data Science',slug:'data-science',status:'Active'},{id:'ca4',name:'DevOps',slug:'devops',status:'Active'}],
+instructors:[{id:'i1',name:'Saiful Islam',expertise:'Next.js, Node.js',email:'saiful@example.com',status:'Active'},{id:'i2',name:'Nadia Karim',expertise:'UI/UX',email:'nadia@example.com',status:'Active'},{id:'i3',name:'Monal Singh',expertise:'Data analytics',email:'monal@example.com',status:'Active'}],
+courses:[
+{id:'c1',title:'Next.js Full-Stack Mastery',category:'Web Development',instructor:'Saiful Islam',level:'Advanced',language:'English',price:6500,orig:8500,badge:'Hot',status:'Published',desc:'Server actions, auth and full-stack apps.',sections:[{t:'Getting started',lectures:[{t:'Course roadmap',type:'Video',dur:'05:10',free:true},{t:'Project setup',type:'Video',dur:'12:30',free:false}]}]},
+{id:'c2',title:'UI/UX Design Masterclass',category:'UI/UX Design',instructor:'Nadia Karim',level:'Beginner',language:'English',price:3900,orig:4900,badge:'',status:'Published',desc:'Modern UI/UX principles and Figma.',sections:[{t:'Design basics',lectures:[{t:'What is UX?',type:'Video',dur:'08:00',free:true}]}]},
+{id:'c3',title:'Job-Ready Data Analytics',category:'Data Science',instructor:'Monal Singh',level:'Beginner',language:'Hindi',price:4500,orig:7999,badge:'Hot & New',status:'Draft',desc:'Excel, SQL, Python and Power BI.',sections:[{t:'Introduction to Data Analytics',lectures:[{t:'Welcome',type:'Video',dur:'04:12',free:true},{t:'Tools setup',type:'Note',dur:'',free:false}]}]}],
+live:[{id:'l1',title:'Building Agentic AI Systems',host:'Saiful Islam',date:'2026-12-12',link:'https://example.com/live',status:'Upcoming'},{id:'l2',title:'Postgres Performance Tuning',host:'Monal Singh',date:'2026-10-10',link:'https://example.com/rec',status:'Recorded'}],
+playlists:[{id:'p1',title:'Complete Web Development Bootcamp',channel:'CodeWithHarry',category:'Web Development',videos:48,url:'https://youtube.com',status:'Published'},{id:'p2',title:'Data Structures & Algorithms',channel:'Take U Forward',category:'Programming',videos:62,url:'https://youtube.com',status:'Published'}],
+notes:[{id:'n1',title:'Next.js cheat sheet',course:'Next.js Full-Stack Mastery',url:'https://example.com/n1.pdf',status:'Published'},{id:'n2',title:'SQL quick reference',course:'Job-Ready Data Analytics',url:'https://example.com/n2.pdf',status:'Draft'}],
+students:[{id:'s1',name:'Tanvir Ahmed',email:'tanvir@example.com',phone:'01700000001',joined:'2026-10-02',status:'Active'},{id:'s2',name:'Sadia Islam',email:'sadia@example.com',phone:'01700000002',joined:'2026-10-14',status:'Active'},{id:'s3',name:'Imran Hossain',email:'imran@example.com',phone:'01700000003',joined:'2026-11-01',status:'Active'}],
+orders:[{id:'o1',student:'Tanvir Ahmed',course:'Next.js Full-Stack Mastery',method:'bKash',trx:'8N7A6D5X',amount:6500,date:'2026-11-13',status:'Pending'},{id:'o2',student:'Sadia Islam',course:'UI/UX Design Masterclass',method:'Stripe',trx:'ST-1041',amount:3900,date:'2026-11-12',status:'Approved'},{id:'o3',student:'Imran Hossain',course:'Next.js Full-Stack Mastery',method:'Nagad',trx:'7K2M9PQ1',amount:6500,date:'2026-11-11',status:'Approved'},{id:'o4',student:'Mehnaz Rahman',course:'Job-Ready Data Analytics',method:'Bank transfer',trx:'',amount:4500,date:'2026-11-10',status:'Pending'}],
+coupons:[{id:'k1',code:'INDEPENDENCE20',discount:20,expires:'2026-12-31',uses:34,status:'Active'},{id:'k2',code:'WELCOME10',discount:10,expires:'2026-09-30',uses:112,status:'Expired'}],
+blogs:[{id:'b1',title:'Building scalable APIs with Node.js',author:'Saiful Islam',tag:'Backend',date:'2026-07-10',status:'Published'},{id:'b2',title:'Next.js performance tips',author:'Saiful Islam',tag:'Next.js',date:'2026-07-18',status:'Draft'}],
+reviews:[{id:'r1',student:'Sadia Islam',course:'UI/UX Design Masterclass',rating:5,text:'Clear and practical.',status:'Approved'},{id:'r2',student:'Imran Hossain',course:'Next.js Full-Stack Mastery',rating:4,text:'Great projects, wish for more auth content.',status:'Pending'}],
+support:[{id:'q1',student:'Tanvir Ahmed',subject:'Cannot access course after payment',message:'Paid via bKash yesterday.',status:'Open'},{id:'q2',student:'Sadia Islam',subject:'Certificate name change',message:'Please update my name.',status:'Resolved'}],
+site:{name:'Academy',banner:'Live: Building Agentic AI Systems',whatsapp:'',email:'contact@example.com',payLink:''}});
+let S=null;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!S||!S.courses)S=seed();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const ST={Draft:['Draft','Published','Archived']};
+const F={
+courses:[['title','Title','text'],['category','Category','sel','categories'],['instructor','Instructor','sel','instructors'],['level','Level','sel',['Beginner','Intermediate','Advanced']],['language','Language','sel',['English','Bangla','Hindi']],['price','Price (৳)','number'],['orig','Original price (৳)','number'],['badge','Badge','text'],['status','Status','sel',['Draft','Published','Archived']],['desc','Short description','area']],
+categories:[['name','Name','text'],['slug','Slug','text'],['status','Status','sel',['Active','Hidden']]],
+live:[['title','Title','text'],['host','Host','sel','instructors'],['date','Date','date'],['link','Link','text'],['status','Status','sel',['Upcoming','Recorded']]],
+playlists:[['title','Title','text'],['channel','Channel','text'],['category','Category','text'],['videos','Videos','number'],['url','YouTube URL','text'],['status','Status','sel',['Published','Draft']]],
+notes:[['title','Title','text'],['course','Course','sel','courses'],['url','File URL','text'],['status','Status','sel',['Published','Draft']]],
+students:[['name','Name','text'],['email','Email','text'],['phone','Phone','text'],['joined','Joined','date'],['status','Status','sel',['Active','Blocked']]],
+instructors:[['name','Name','text'],['expertise','Expertise','text'],['email','Email','text'],['status','Status','sel',['Active','Hidden']]],
+orders:[['student','Student','text'],['course','Course','sel','courses'],['method','Method','sel',['bKash','Nagad','Stripe','Bank transfer','Razorpay']],['trx','Transaction ID','text'],['amount','Amount (৳)','number'],['date','Date','date'],['status','Status','sel',['Pending','Approved','Rejected']]],
+coupons:[['code','Code','text'],['discount','Discount (%)','number'],['expires','Expires','date'],['uses','Uses','number'],['status','Status','sel',['Active','Expired']]],
+blogs:[['title','Title','text'],['author','Author','text'],['tag','Tag','text'],['date','Date','date'],['status','Status','sel',['Published','Draft']]],
+reviews:[['student','Student','text'],['course','Course','sel','courses'],['rating','Rating (1–5)','number'],['text','Review','area'],['status','Status','sel',['Approved','Pending','Hidden']]],
+support:[['student','Student','text'],['subject','Subject','text'],['message','Message','area'],['status','Status','sel',['Open','Resolved']]]};
+const PG={dashboard:['Dashboard'],courses:['Courses','course',['title','category','instructor','price','students','status']],categories:['Categories','category',['name','slug','status']],live:['Live Classes','class',['title','host','date','status']],playlists:['YouTube Playlists','playlist',['title','channel','videos','status']],notes:['Notes','note',['title','course','status']],students:['Students','student',['name','email','phone','joined','status']],instructors:['Instructors','instructor',['name','expertise','email','status']],orders:['Orders & Payments','order',['student','course','method','trx','amount','status']],coupons:['Coupons','coupon',['code','discount','expires','uses','status']],blogs:['Blogs','blog',['title','author','tag','date','status']],reviews:['Reviews','review',['student','course','rating','status']],support:['1:1 Support','ticket',['student','subject','status']],site:['Site Settings']};
+const GR=[['Overview',['dashboard']],['Learning',['courses','categories','live','playlists','notes']],['People',['students','instructors']],['Sales',['orders','coupons']],['Content',['blogs','reviews','support']],['System',['site']]];
+const stu=c=>S.orders.filter(o=>o.course===c.title&&o.status==='Approved').length;
+const opts=o=>Array.isArray(o)?o:S[o].map(r=>r.name||r.title);
+const fl=(k,n)=>(F[k].find(f=>f[0]===n)||[])[1]||(n==='students'?'Students':n[0].toUpperCase()+n.slice(1));
+const pill=v=>`<span class="pl ${['Published','Approved','Active','Resolved','Upcoming'].includes(v)?'ok':['Pending','Open','Draft','Recorded'].includes(v)?'wn':['Rejected','Blocked','Archived','Expired','Hidden'].includes(v)?'bd':''}">${esc(v)}</span>`;
+const cell=(k,r,c)=>c==='status'?pill(r.status):(c==='price'||c==='amount')?fmt(r[c]):c==='students'?stu(r):c==='rating'?'★ '+r.rating:c==='discount'?r.discount+'%':esc(r[c]);
+const fld=(n,t,o,v,a)=>t==='area'?`<textarea ${a} rows="3">${esc(v)}</textarea>`:t==='sel'?`<select ${a}>${opts(o).map(x=>`<option${x==v?' selected':''}>${esc(x)}</option>`).join('')}</select>`:`<input class="in" type="${t}" ${a} value="${esc(v)}">`;
+let Q={},FS={},cur=null;
+function tbl(k){const q=(Q[k]||'').toLowerCase(),fs=FS[k]||'',cols=PG[k][2];
+const rows=S[k].filter(r=>(!q||JSON.stringify(r).toLowerCase().includes(q))&&(!fs||r.status===fs));
+return `<div class="tw"><table><tr>${cols.map(c=>`<th>${fl(k,c)}</th>`).join('')}<th></th></tr>${rows.map(r=>`<tr>${cols.map(c=>`<td>${cell(k,r,c)}</td>`).join('')}<td><div class="row">${k==='orders'&&r.status==='Pending'?`<button class="btn sm" data-a="ap" data-id="${r.id}">Approve</button><button class="b2 sm" data-a="rj" data-id="${r.id}">Reject</button>`:''}<button class="b2 sm" data-a="edit" data-k="${k}" data-id="${r.id}">Edit</button><button class="b2 sm" data-a="del" data-k="${k}" data-id="${r.id}">Delete</button></div></td></tr>`).join('')||`<tr><td colspan="${cols.length+1}" class="mu">Nothing here yet.</td></tr>`}</table></div>`}
+function list(k){const so=(F[k].find(f=>f[0]==='status')||[])[3]||[];
+return `<div class="tb"><h1>${PG[k][0]}</h1><button class="btn" data-a="add" data-k="${k}">+ Add ${PG[k][1]}</button></div><div class="ct"><div class="card"><div class="row" style="margin-bottom:12px"><div style="flex:1 1 220px"><input class="in" id="q" aria-label="Search" placeholder="Search ${PG[k][0].toLowerCase()}" value="${esc(Q[k]||'')}"></div><div style="width:170px"><select id="fs" aria-label="Filter by status"><option value="">All statuses</option>${so.map(s=>`<option${FS[k]===s?' selected':''}>${s}</option>`).join('')}</select></div></div><div id="tbl">${tbl(k)}</div></div></div>`}
+function dash(){const ap=S.orders.filter(o=>o.status==='Approved'),rev=ap.reduce((a,o)=>a+Number(o.amount),0),pn=S.orders.filter(o=>o.status==='Pending').length;
+const by=S.courses.map(c=>[c.title,ap.filter(o=>o.course===c.title).reduce((a,o)=>a+Number(o.amount),0)]),mx=Math.max(1,...by.map(b=>b[1]));
+return `<div class="tb"><div><h1>Dashboard</h1><div class="mu">Updates live as you edit data in other pages</div></div></div><div class="ct"><div class="hero"><h2>Welcome back, Admin</h2><p>Review payments, publish courses and keep your academy running from one place.</p><div class="row"><a class="btn" style="text-decoration:none" href="#orders">Review payments</a><a class="b2" style="text-decoration:none;color:#fff;border-color:rgba(255,255,255,.4);background:transparent" href="#courses">Add a course</a></div></div><div class="g4"><div class="kp"><span class="mu">Revenue (approved)</span><b>${fmt(rev)}</b></div><div class="kp"><span class="mu">Students</span><b>${S.students.length}</b></div><div class="kp"><span class="mu">Published courses</span><b>${S.courses.filter(c=>c.status==='Published').length}</b></div><div class="kp"><span class="mu">Payments to review</span><b>${pn}</b><a href="#orders">Review now</a></div></div>
+<div class="fx"><div class="card l"><h2>Revenue by course</h2>${by.map(b=>`<div style="margin-bottom:12px"><div class="row" style="justify-content:space-between"><span>${esc(b[0])}</span><b>${fmt(b[1])}</b></div><div class="bar" style="width:${b[1]/mx*100}%"></div></div>`).join('')}</div>
+<div class="card r"><h2>Open support tickets</h2>${S.support.filter(q=>q.status==='Open').map(q=>`<div style="padding:8px 0;border-bottom:1px solid var(--bd)"><b>${esc(q.subject)}</b><div class="mu">${esc(q.student)}</div></div>`).join('')||'<div class="mu">All clear.</div>'}<a href="#support">All tickets</a></div></div>
+<div class="card"><h2>Recent orders</h2><div class="tw"><table><tr><th>Student</th><th>Course</th><th>Method</th><th>Amount</th><th>Status</th></tr>${S.orders.slice(0,5).map(o=>`<tr><td>${esc(o.student)}</td><td>${esc(o.course)}</td><td>${esc(o.method)}</td><td>${fmt(o.amount)}</td><td>${pill(o.status)}</td></tr>`).join('')}</table></div></div></div>`}
+function editor(){const c=S.courses.find(x=>x.id===cur);if(!c)return list('courses');const p=n=>`data-p="${n}"`;
+return `<div class="tb"><div><a href="#courses">← Courses</a><h1>${esc(c.title)}</h1></div><div class="row">${pill(c.status)}<button class="b2" data-a="sv">Save draft</button><button class="btn" data-a="pub">Publish</button></div></div><div class="ct"><div class="fx"><div class="l"><div class="card"><h2>Basic info</h2>${F.courses.filter(f=>!['price','orig','status'].includes(f[0])).map(([n,l,t,o])=>`<label>${l}${fld(n,t,o,c[n],p(n))}</label>`).join('')}</div>
+<div class="card"><div class="row" style="justify-content:space-between"><h2>Curriculum</h2><button class="b2 sm" data-a="asec">+ Add section</button></div>${c.sections.map((s,i)=>`<div class="sec"><div class="row"><input class="in" style="flex:1" aria-label="Section title" ${p('sections.'+i+'.t')} value="${esc(s.t)}"><button class="b2 sm" data-a="dsec" data-i="${i}">Remove section</button></div>${s.lectures.map((l,j)=>{const b='sections.'+i+'.lectures.'+j+'.';return `<div class="lc"><input class="in" aria-label="Lecture title" ${p(b+'t')} value="${esc(l.t)}"><select aria-label="Type" ${p(b+'type')}>${['Video','Note','Quiz'].map(x=>`<option${x===l.type?' selected':''}>${x}</option>`).join('')}</select><input class="in d" aria-label="Duration" placeholder="mm:ss" ${p(b+'dur')} value="${esc(l.dur)}"><label style="margin:0"><input type="checkbox" ${p(b+'free')}${l.free?' checked':''}> Free preview</label><button class="b2 sm" data-a="dlec" data-i="${i}" data-j="${j}">Remove</button></div>`}).join('')}<button class="b2 sm" style="margin-top:10px" data-a="alec" data-i="${i}">+ Add lecture</button></div>`).join('')||'<div class="mu">No sections yet.</div>'}</div></div>
+<div class="r"><div class="card"><h2>Publish &amp; pricing</h2>${['status','price','orig'].map(n=>{const f=F.courses.find(x=>x[0]===n);return `<label>${f[1]}${fld(n,f[2],f[3],c[n],p(n))}</label>`}).join('')}</div></div></div></div>`}
+function site(){const s=S.site,L={name:'Site name',banner:'Top banner text',whatsapp:'WhatsApp number',email:'Support email',payLink:'Backup payment link'};
+return `<div class="tb"><h1>Site Settings</h1></div><div class="ct"><div class="card" style="max-width:560px"><form id="sf">${Object.keys(L).map(k=>`<label>${L[k]}<input class="in" name="${k}" value="${esc(s[k])}"></label>`).join('')}<div class="row" style="margin-top:16px"><button class="btn" type="submit">Save settings</button><button class="b2" type="button" data-a="theme">Toggle light/dark</button><button class="b2" type="button" data-a="reset">Reset demo data</button></div></form></div></div>`}
+function render(){const h=(location.hash||'#dashboard').slice(1);let k=h;if(h.startsWith('course-')){cur=h.slice(7);k='editor'}else if(!PG[h])k='dashboard';
+$('#nav').innerHTML='<div class="lg">Academy Admin</div>'+GR.map(g=>`<div class="gl">${g[0]}</div>${g[1].map(x=>`<a class="nv${(k===x||(k==='editor'&&x==='courses'))?' on':''}" href="#${x}">${PG[x][0]}</a>`).join('')}`).join('');
+$('#v').innerHTML=k==='dashboard'?dash():k==='editor'?editor():k==='site'?site():list(k);window.scrollTo(0,0)}
+function modal(h){$('#m').innerHTML=`<div class="ov"><div class="md" role="dialog" aria-modal="true">${h}</div></div>`}
+const closeM=()=>$('#m').innerHTML='';
+function toast(m){const t=$('#t');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2200)}
+const setP=(o,p,v)=>{const a=p.split('.');while(a.length>1)o=o[a.shift()];o[a[0]]=v};
+const refresh=k=>{save();render()};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,k=b.dataset.k,id=b.dataset.id,c=S.courses.find(x=>x.id===cur),i=+b.dataset.i,j=+b.dataset.j;
+if(a==='close')closeM();
+else if(a==='add'){if(k==='courses'){const n={id:'c'+uid(),title:'Untitled course',category:S.categories[0].name,instructor:S.instructors[0].name,level:'Beginner',language:'English',price:0,orig:0,badge:'',status:'Draft',desc:'',sections:[]};S.courses.unshift(n);save();location.hash='#course-'+n.id}else modal(`<h2>Add ${PG[k][1]}</h2><form data-k="${k}">${F[k].map(([n,l,t,o])=>`<label>${l}${fld(n,t,o,'',`name="${n}"`)}</label>`).join('')}<div class="row" style="margin-top:16px"><button class="btn" type="submit">Save</button><button class="b2" type="button" data-a="close">Cancel</button></div></form>`)}
+else if(a==='edit'){if(k==='courses')location.hash='#course-'+id;else{const r=S[k].find(x=>x.id===id);modal(`<h2>Edit ${PG[k][1]}</h2><form data-k="${k}" data-id="${id}">${F[k].map(([n,l,t,o])=>`<label>${l}${fld(n,t,o,r[n],`name="${n}"`)}</label>`).join('')}<div class="row" style="margin-top:16px"><button class="btn" type="submit">Save</button><button class="b2" type="button" data-a="close">Cancel</button></div></form>`)}}
+else if(a==='del')modal(`<h2>Delete this ${PG[k][1]}?</h2><p class="mu">This cannot be undone.</p><div class="row"><button class="btn" data-a="del2" data-k="${k}" data-id="${id}">Delete</button><button class="b2" data-a="close">Cancel</button></div>`);
+else if(a==='del2'){S[k]=S[k].filter(x=>x.id!==id);closeM();refresh();toast('Deleted')}
+else if(a==='ap'||a==='rj'){const o=S.orders.find(x=>x.id===id);o.status=a==='ap'?'Approved':'Rejected';if(a==='ap'&&!S.students.some(s=>s.name===o.student))S.students.push({id:'s'+uid(),name:o.student,email:'',phone:'',joined:today(),status:'Active'});refresh();toast(a==='ap'?'Approved, student enrolled':'Order rejected')}
+else if(a==='asec'){c.sections.push({t:'New section',lectures:[]});refresh()}
+else if(a==='dsec'){c.sections.splice(i,1);refresh()}
+else if(a==='alec'){c.sections[i].lectures.push({t:'New lecture',type:'Video',dur:'',free:false});refresh()}
+else if(a==='dlec'){c.sections[i].lectures.splice(j,1);refresh()}
+else if(a==='sv'){save();toast('Saved')}
+else if(a==='pub'){c.status='Published';refresh();toast('Course published')}
+else if(a==='theme'){const r=document.documentElement;r.dataset.theme=r.dataset.theme==='light'?'dark':'light'}
+else if(a==='reset'){S=seed();refresh();toast('Demo data restored')}});
+document.addEventListener('submit',e=>{e.preventDefault();const f=e.target;if(f.id==='sf'){Object.assign(S.site,Object.fromEntries(new FormData(f)));save();toast('Settings saved');return}
+const k=f.dataset.k,id=f.dataset.id,d=Object.fromEntries(new FormData(f));F[k].forEach(([n,,t])=>{if(t==='number')d[n]=Number(d[n]||0)});
+if(id)Object.assign(S[k].find(x=>x.id===id),d);else S[k].unshift({id:uid(),...d});closeM();refresh();toast('Saved')});
+const onP=e=>{const el=e.target;if(el.dataset&&el.dataset.p&&cur){const c=S.courses.find(x=>x.id===cur);let v=el.type==='checkbox'?el.checked:el.value;if(['price','orig'].includes(el.dataset.p))v=Number(v||0);setP(c,el.dataset.p,v);save()}
+else if(el.id==='q'){Q[location.hash.slice(1)]=el.value;$('#tbl').innerHTML=tbl(location.hash.slice(1))}
+else if(el.id==='fs'){FS[location.hash.slice(1)]=el.value;$('#tbl').innerHTML=tbl(location.hash.slice(1))}};
+document.addEventListener('input',onP);document.addEventListener('change',onP);
+addEventListener('hashchange',render);render();
+</script></body></html>
